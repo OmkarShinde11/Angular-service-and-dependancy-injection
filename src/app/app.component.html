@@ -1,5 +1,5 @@
-<app-new-account (sendData)="accept($event)"></app-new-account>
+<app-new-account ></app-new-account>
 <br>
-<app-account *ngFor="let content of serverStatus ; let i=index" [name]="content.name" [status]="content.status" [id]="i" (status1)="changes($event)">
+<app-account *ngFor="let content of serverStatus ; let i=index" [name]="content.name" [status]="content.status" [id]="i" >
 </app-account>
 

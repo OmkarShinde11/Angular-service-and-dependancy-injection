@@ -5,12 +5,13 @@
       <input
         type="text"
         class="form-control"
-        [(ngModel)]="accountName"
+       
+        #accountName
         required
       />
     </div>
     <div class="form-group">
-      <select class="form-control" [(ngModel)]="accountStatus" required>
+      <select class="form-control"  #accountStatus required>
         <option value="active">Active</option>
         <option value="inactive">Inactive</option>
         <option value="unknown">Unknown</option>

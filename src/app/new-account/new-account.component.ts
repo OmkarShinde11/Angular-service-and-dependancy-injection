@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { serverInfo } from 'src/assets/serverInfo';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { DataService } from '../Services/data.service';
+import { LoggingService } from '../Services/logging.service';
 
 @Component({
   selector: 'app-new-account',
@@ -7,21 +8,26 @@ import { serverInfo } from 'src/assets/serverInfo';
   styleUrls: ['./new-account.component.css']
 })
 export class NewAccountComponent implements OnInit {
-  accountName:string;
-  accountStatus:string;
+  @ViewChild('accountName')accountName:ElementRef;
+  @ViewChild('accountStatus')accountStatus:ElementRef;
 
- @Output()sendData=new EventEmitter<{name:string,status:string}>();
-  constructor() { }
+//  @Output()sendData=new EventEmitter<{name:string,status:string}>();
+  constructor(private loggingservice:LoggingService,private dataservice:DataService) { }
 
   ngOnInit(): void {
+    this.dataservice.StatusChange.subscribe((status:string)=>{
+      alert('The Status Change '+status)
+    })
   }
   sendInfo(){
-    this.sendData.emit(
-      {
-        name:this.accountName,
-        status:this.accountStatus,
-      }
-    )
+    // this.sendData.emit(
+    //   {
+    //     name:this.accountName.nativeElement.value,
+    //     status:this.accountStatus.nativeElement.value,
+    //   }
+    // )
+    this.dataservice.addAccount(this.accountName.nativeElement.value,this.accountStatus.nativeElement.value);
+    
     
   }
 
